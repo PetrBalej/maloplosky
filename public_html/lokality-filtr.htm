@@ -2,6 +2,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+        <!-- vloženo pouze pro zprovoznění dema -->
+        <base href="http://www.ochranaprirody.cz/"> 
+            
 	<meta charset="utf-8" />
 	<meta name="keywords" content="" />
 	<meta name="description" content="" />
@@ -36,7 +39,18 @@
 	<script src="/res/js/web.js"></script>
 
 	
-	
+	<!-- leaflet -->
+        <!-- Load Leaflet from CDN -->
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css">
+        <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"></script>
+        <!-- Load Esri Leaflet from CDN -->
+        <script src="https://unpkg.com/esri-leaflet@2.3.1/dist/esri-leaflet.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet.markercluster@1.0.4/dist/MarkerCluster.Default.css">
+        <link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet.markercluster@1.0.4/dist/MarkerCluster.css">
+        <script src="https://unpkg.com/leaflet.markercluster@1.0.4/dist/leaflet.markercluster.js"></script>
+        <!-- Load Clustered Feature Layer from CDN -->
+        <script src="https://unpkg.com/esri-leaflet-cluster@2.0.1/dist/esri-leaflet-cluster.js"></script>
+        <!-- /leaflet -->	
 	
 	<link rel="icon" href="/res/favicon.ico" type="image/ico" />
 	<script type="text/javascript" src="/server/lib/vizus-framework-2.0.38/web/lib.js"></script>
@@ -281,227 +295,84 @@ html, body, #map-canvas
 	padding: 0px
 }
 </style>
-<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
-<script type="text/javascript" src="/res/js/markerclusterer.js"></script>
+
 <script>
-function initialize()
-{
-	var myLatlng = new google.maps.LatLng(49.80157175512614,15.3270658493042);
-	var mapOptions = {
-		zoom: 7,
-		center: myLatlng
-	}
-	var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-	
-			var imagemzchu = {
-			url: '/res/images/map/mzchu.png',
-			size: new google.maps.Size(21, 41),
-			origin: new google.maps.Point(0, 0),
-			anchor: new google.maps.Point(11, 41)
-		};
-			var imagegl = {
-			url: '/res/images/map/gl.png',
-			size: new google.maps.Size(21, 41),
-			origin: new google.maps.Point(0, 0),
-			anchor: new google.maps.Point(11, 41)
-		};
-			var imageps = {
-			url: '/res/images/map/ps.png',
-			size: new google.maps.Size(21, 41),
-			origin: new google.maps.Point(0, 0),
-			anchor: new google.maps.Point(11, 41)
-		};
-			var imageoz = {
-			url: '/res/images/map/oz.png',
-			size: new google.maps.Size(21, 41),
-			origin: new google.maps.Point(0, 0),
-			anchor: new google.maps.Point(11, 41)
-		};
-			
-		var markers = [];
-					var marker35 = new google.maps.Marker({
-			position: new google.maps.LatLng(48.867596,16.647842),
-			title: "NPR Děvín-Kotel-Soutěska",
-			url: "http://www.ochranaprirody.cz/lokality/?idmzchu=75",
-			icon: imagemzchu		});
-		google.maps.event.addListener(marker35, 'click', function() {
-			window.location.href = marker35.url;
-		});
-		markers.push(marker35);
-					var marker80 = new google.maps.Marker({
-			position: new google.maps.LatLng(48.825832,16.64182),
-			title: "PP Kočičí skála",
-			url: "http://www.ochranaprirody.cz/lokality/?idmzchu=175",
-			icon: imagemzchu		});
-		google.maps.event.addListener(marker80, 'click', function() {
-			window.location.href = marker80.url;
-		});
-		markers.push(marker80);
-					var marker130 = new google.maps.Marker({
-			position: new google.maps.LatLng(48.776141,16.699892),
-			title: "NPR Slanisko u Nesytu",
-			url: "http://www.ochranaprirody.cz/lokality/?idmzchu=298",
-			icon: imagemzchu		});
-		google.maps.event.addListener(marker130, 'click', function() {
-			window.location.href = marker130.url;
-		});
-		markers.push(marker130);
-					var marker188 = new google.maps.Marker({
-			position: new google.maps.LatLng(48.806801,16.648131),
-			title: "PR Svatý kopeček",
-			url: "http://www.ochranaprirody.cz/lokality/?idmzchu=430",
-			icon: imagemzchu		});
-		google.maps.event.addListener(marker188, 'click', function() {
-			window.location.href = marker188.url;
-		});
-		markers.push(marker188);
-					var marker190 = new google.maps.Marker({
-			position: new google.maps.LatLng(48.788375,16.630517),
-			title: "PR Šibeničník",
-			url: "http://www.ochranaprirody.cz/lokality/?idmzchu=434",
-			icon: imagemzchu		});
-		google.maps.event.addListener(marker190, 'click', function() {
-			window.location.href = marker190.url;
-		});
-		markers.push(marker190);
-					var marker201 = new google.maps.Marker({
-			position: new google.maps.LatLng(48.818626,16.63955),
-			title: "PR Turold",
-			url: "http://www.ochranaprirody.cz/lokality/?idmzchu=456",
-			icon: imagemzchu		});
-		google.maps.event.addListener(marker201, 'click', function() {
-			window.location.href = marker201.url;
-		});
-		markers.push(marker201);
-					var marker242 = new google.maps.Marker({
-			position: new google.maps.LatLng(48.849225,16.726019),
-			title: "NPR Křivé jezero",
-			url: "http://www.ochranaprirody.cz/lokality/?idmzchu=576",
-			icon: imagemzchu		});
-		google.maps.event.addListener(marker242, 'click', function() {
-			window.location.href = marker242.url;
-		});
-		markers.push(marker242);
-					var marker409 = new google.maps.Marker({
-			position: new google.maps.LatLng(48.825829,16.616796),
-			title: "PP Anenský vrch",
-			url: "http://www.ochranaprirody.cz/lokality/?idmzchu=1228",
-			icon: imagemzchu		});
-		google.maps.event.addListener(marker409, 'click', function() {
-			window.location.href = marker409.url;
-		});
-		markers.push(marker409);
-					var marker410 = new google.maps.Marker({
-			position: new google.maps.LatLng(48.791838,16.692571),
-			title: "PR Liščí vrch",
-			url: "http://www.ochranaprirody.cz/lokality/?idmzchu=1229",
-			icon: imagemzchu		});
-		google.maps.event.addListener(marker410, 'click', function() {
-			window.location.href = marker410.url;
-		});
-		markers.push(marker410);
-					var marker411 = new google.maps.Marker({
-			position: new google.maps.LatLng(48.822138,16.624308),
-			title: "PP Růžový kopec",
-			url: "http://www.ochranaprirody.cz/lokality/?idmzchu=1230",
-			icon: imagemzchu		});
-		google.maps.event.addListener(marker411, 'click', function() {
-			window.location.href = marker411.url;
-		});
-		markers.push(marker411);
-					var marker541 = new google.maps.Marker({
-			position: new google.maps.LatLng(48.844778,16.701777),
-			title: "PR Milovická stráň",
-			url: "http://www.ochranaprirody.cz/lokality/?idmzchu=1710",
-			icon: imagemzchu		});
-		google.maps.event.addListener(marker541, 'click', function() {
-			window.location.href = marker541.url;
-		});
-		markers.push(marker541);
-					var marker564 = new google.maps.Marker({
-			position: new google.maps.LatLng(48.803287,16.688374),
-			title: "PP Kienberg",
-			url: "http://www.ochranaprirody.cz/lokality/?idmzchu=1779",
-			icon: imagemzchu		});
-		google.maps.event.addListener(marker564, 'click', function() {
-			window.location.href = marker564.url;
-		});
-		markers.push(marker564);
-					var marker700 = new google.maps.Marker({
-			position: new google.maps.LatLng(48.886541,16.653859),
-			title: "NPP Kalendář věků",
-			url: "http://www.ochranaprirody.cz/lokality/?idmzchu=11174",
-			icon: imagemzchu		});
-		google.maps.event.addListener(marker700, 'click', function() {
-			window.location.href = marker700.url;
-		});
-		markers.push(marker700);
-					var marker768 = new google.maps.Marker({
-			position: new google.maps.LatLng(48.810975,16.658674),
-			title: "PP Lom Janičův vrch",
-			url: "http://www.ochranaprirody.cz/lokality/?idmzchu=14299",
-			icon: imagemzchu		});
-		google.maps.event.addListener(marker768, 'click', function() {
-			window.location.href = marker768.url;
-		});
-		markers.push(marker768);
-					var marker772 = new google.maps.Marker({
-			position: new google.maps.LatLng(48.847795,16.6431),
-			title: "NPR Tabulová",
-			url: "http://www.ochranaprirody.cz/lokality/?idmzchu=14394",
-			icon: imagemzchu		});
-		google.maps.event.addListener(marker772, 'click', function() {
-			window.location.href = marker772.url;
-		});
-		markers.push(marker772);
-					var marker781 = new google.maps.Marker({
-			position: new google.maps.LatLng(48.82047288,16.67487904),
-			title: "PP Na cvičišti",
-			url: "http://www.ochranaprirody.cz/lokality/?idmzchu=14662",
-			icon: imagemzchu		});
-		google.maps.event.addListener(marker781, 'click', function() {
-			window.location.href = marker781.url;
-		});
-		markers.push(marker781);
-			
-			/*var marker1 = new google.maps.Marker({
-			position: new google.maps.LatLng(50.18569213491302,17.111892700195312),
-			map: map,
-			url: "http://ochranaprirody.alfa.vizus.cz/lokality/g0001/",
-			title: "Křišťálová studánka",
-			icon: imagegl		});
-		google.maps.event.addListener(marker1, 'click', function() {
-			window.location.href = marker1.url;
-		});*/
-		
-		/*
-		var markers = [];
-		for(var i = 0; i < 50; i++)
-		{			
-			var marker = new google.maps.Marker({
-			position: new google.maps.LatLng(50.18569213491302 + Math.random(),17.111892700195312 + Math.random()),						
-			title: "Křišťálová studánka",
-			icon: imagegl		});
-			markers.push(marker);
-		}
-		*/
-		
-		var mcOptions = {
-			styles: [
-				{
-					url: '/res/images/map/cluster.png',
-					width: 40,
-					height: 45,
-					anchorIcon: [40,23],
-					textColor: '#ffffff'
-				}
-			]
-		}				
-		
-		
-		var mc = new MarkerClusterer(map, markers, mcOptions);		
-	}
-google.maps.event.addDomListener(window, 'load', initialize);
+
+// Možnosti:
+
+// a) Výchozí situace při zobrazení všech maloplošek (http://www.ochranaprirody.cz/lokality/)  
+//    -> beze změny kódu
+
+// b) Zobrazení detailu jedné konkrétní maloplošky (http://www.ochranaprirody.cz/lokality/?idmzchu=75)
+//    -> odkomentování řádku níže a vložení příslušného idmzchu podle URL  
+// var maloplosky_id_selected = 75;
+
+// c) Zobrazení vyfiltrovaných maloplošek (http://www.ochranaprirody.cz/lokality/?filter_rp=857&filter_vzchu=73&filter_ko=0&filter_text=)
+//    na základě získaného seznamu jejich IDeček 
+//    -> odkomentování řádku níže a vložení čárkami odděleného seznamu IDeček požadovaných maloplošek  
+var maloplosky_ids_filtered = "1629,2106,1632,1634,1670,1669,3378,483,865,161,1801,943,503,136,440"; 
+
+
+            var setView_center = [49.9, 15.5]; // střed ČR
+            var setView_zoom = 7; // výchozí zoom pro celou ČR
+
+            var where = "1=1"; // výchozí WHERE dotaz, nefiltruje se
+            if (typeof maloplosky_ids_filtered !== 'undefined' && maloplosky_ids_filtered !== '') {
+                var where = "ID IN(" + maloplosky_ids_filtered + ")"; // změna WHERE dotazu pro výběr vyfiltrovaných maloplošek
+            }
+
+
+            window.onload = function () {
+
+                var map = L.map('map-canvas'); // výběr DIVu pro zobrazení mapy
+
+                L.esri.basemapLayer('Streets').addTo(map); // přidání podkladové vrstvy do mapy
+
+                var icon_selected = L.icon({// ikona markeru (červená) pro znázornění vybrané maloplošky
+                    iconUrl: 'https://upload.wikimedia.org/wikipedia/commons/9/9e/Pin-location.png',
+                    iconSize: [45, 45],
+                    iconAnchor: [22, 22],
+                    popupAnchor: [0, -10]
+                });
+
+                var maloplosky = L.esri.Cluster.featureLayer({// přidání bodové vrstvy maloplošek (Esri featureLayer) z REST API AOPK
+                    disableClusteringAtZoom: 12,
+                    url: 'http://gis.nature.cz/arcgis/rest/services/UzemniOchrana/MzchuAOPK/MapServer/0',
+                    where: where,
+                    pointToLayer: function (geojson, latlng) {
+
+                        prop = {title: geojson.properties.KAT + " " + geojson.properties.NAZEV}; // titulek nad markerem
+
+                        if (typeof maloplosky_id_selected !== 'undefined' && maloplosky_id_selected !== '' && maloplosky_id_selected == geojson.properties.ID) { // změna ikonky markeru (na červenou) u vybrané maloplošky
+                            prop.icon = icon_selected;
+                        }
+
+                        return L.marker(latlng, prop);
+                    }
+                }).addTo(map);
+
+
+                if (typeof maloplosky_id_selected !== 'undefined' && maloplosky_id_selected !== '') { // zoom nad konkrétní pozici vybraného markeru
+
+                    maloplosky.query().where("ID = " + maloplosky_id_selected).run(function (error, featureCollection) {
+
+                        coords = featureCollection.features[0].geometry.coordinates;
+                        map.setView([coords[1], coords[0]], 12);
+
+                        maloploska_name = featureCollection.features[0].properties.KAT + " " + featureCollection.features[0].properties.NAZEV + " (ad 2.)";
+                        document.getElementById("demo_h1").textContent = maloploska_name;
+                    });
+
+                } else { // výchozí zoom nad celou ČR
+                    map.setView(setView_center, setView_zoom);
+                }
+
+                maloplosky.on('click', function (e) { // kliknutí na konkrétní marker zobrazí URL s detailem dané maloplošky
+                    window.open(window.location.protocol + "//" + window.location.hostname + window.location.pathname + "?idmzchu=" + e.layer.feature.properties.ID, name = "_self");
+                });
+
+            }
+
 </script>
 
 <div style="border: 1px solid #2B6647;">
