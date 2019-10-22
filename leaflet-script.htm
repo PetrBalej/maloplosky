@@ -87,8 +87,6 @@
                         coords = featureCollection.features[0].geometry.coordinates;
                         map.setView([coords[1], coords[0]], 12);
 
-                        maloploska_name = featureCollection.features[0].properties.KAT + " " + featureCollection.features[0].properties.NAZEV + " (ad 2.)";
-                        document.getElementById("demo_h1").textContent = maloploska_name;
                     });
 
                 } else { // výchozí zoom nad celou ČR
