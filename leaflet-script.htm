@@ -1,0 +1,104 @@
+<!-- 1) -->
+<!-- přilinkování nově potřebných CSS a JS souborů do HTML hlavičky -->
+
+<!-- leaflet -->
+<!-- Load Leaflet from CDN -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css">
+<script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"></script>
+<!-- Load Esri Leaflet from CDN -->
+<script src="https://unpkg.com/esri-leaflet@2.3.1/dist/esri-leaflet.js"></script>
+<link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet.markercluster@1.0.4/dist/MarkerCluster.Default.css">
+<link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet.markercluster@1.0.4/dist/MarkerCluster.css">
+<script src="https://unpkg.com/leaflet.markercluster@1.0.4/dist/leaflet.markercluster.js"></script>
+<!-- Load Clustered Feature Layer from CDN -->
+<script src="https://unpkg.com/esri-leaflet-cluster@2.0.1/dist/esri-leaflet-cluster.js"></script>
+<!-- /leaflet -->
+
+
+
+<!-- 2) -->
+<!-- odstranění původně linkovaných souborů https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false a /res/js/markerclusterer.js -->
+
+
+
+<!-- 3) -->
+<!-- náhrada Google Maps skriptu s generováním původních markerů za Leaflet -->
+
+<script>
+
+// Možnosti:
+
+// a) Výchozí situace při zobrazení všech maloplošek (http://www.ochranaprirody.cz/lokality/)  
+//    -> beze změny kódu
+
+// b) Zobrazení detailu jedné konkrétní maloplošky (http://www.ochranaprirody.cz/lokality/?idmzchu=75)
+//    -> odkomentování řádku níže a vložení příslušného idmzchu podle URL  
+// var maloplosky_id_selected = 75;
+
+// c) Zobrazení vyfiltrovaných maloplošek (http://www.ochranaprirody.cz/lokality/?filter_rp=857&filter_vzchu=73&filter_ko=0&filter_text=)
+//    na základě získaného seznamu jejich IDeček 
+//    -> odkomentování řádku níže a vložení čárkami odděleného seznamu IDeček požadovaných maloplošek  
+// var maloplosky_ids_filtered = "1629,2106,1632,1634,1670,1669,3378,483,865,161,1801,943,503,136,440"; 
+
+
+            var setView_center = [49.9, 15.5]; // střed ČR
+            var setView_zoom = 7; // výchozí zoom pro celou ČR
+
+            var where = "1=1"; // výchozí WHERE dotaz, nefiltruje se
+            if (typeof maloplosky_ids_filtered !== 'undefined' && maloplosky_ids_filtered !== '') {
+                var where = "ID IN(" + maloplosky_ids_filtered + ")"; // změna WHERE dotazu pro výběr vyfiltrovaných maloplošek
+            }
+
+
+            window.onload = function () {
+
+                var map = L.map('map-canvas'); // výběr DIVu pro zobrazení mapy
+
+                L.esri.basemapLayer('Streets').addTo(map); // přidání podkladové vrstvy do mapy
+
+                var icon_selected = L.icon({// ikona markeru (červená) pro znázornění vybrané maloplošky
+                    iconUrl: 'https://upload.wikimedia.org/wikipedia/commons/9/9e/Pin-location.png',
+                    iconSize: [45, 45],
+                    iconAnchor: [22, 22],
+                    popupAnchor: [0, -10]
+                });
+
+                var maloplosky = L.esri.Cluster.featureLayer({// přidání bodové vrstvy maloplošek (Esri featureLayer) z REST API AOPK
+                    disableClusteringAtZoom: 12,
+                    url: 'http://gis.nature.cz/arcgis/rest/services/UzemniOchrana/MzchuAOPK/MapServer/0',
+                    where: where,
+                    pointToLayer: function (geojson, latlng) {
+
+                        prop = {title: geojson.properties.KAT + " " + geojson.properties.NAZEV}; // titulek nad markerem
+
+                        if (typeof maloplosky_id_selected !== 'undefined' && maloplosky_id_selected !== '' && maloplosky_id_selected == geojson.properties.ID) { // změna ikonky markeru (na červenou) u vybrané maloplošky
+                            prop.icon = icon_selected;
+                        }
+
+                        return L.marker(latlng, prop);
+                    }
+                }).addTo(map);
+
+
+                if (typeof maloplosky_id_selected !== 'undefined' && maloplosky_id_selected !== '') { // zoom nad konkrétní pozici vybraného markeru
+
+                    maloplosky.query().where("ID = " + maloplosky_id_selected).run(function (error, featureCollection) {
+
+                        coords = featureCollection.features[0].geometry.coordinates;
+                        map.setView([coords[1], coords[0]], 12);
+
+                        maloploska_name = featureCollection.features[0].properties.KAT + " " + featureCollection.features[0].properties.NAZEV + " (ad 2.)";
+                        document.getElementById("demo_h1").textContent = maloploska_name;
+                    });
+
+                } else { // výchozí zoom nad celou ČR
+                    map.setView(setView_center, setView_zoom);
+                }
+
+                maloplosky.on('click', function (e) { // kliknutí na konkrétní marker zobrazí URL s detailem dané maloplošky
+                    window.open(window.location.protocol + "//" + window.location.hostname + window.location.pathname + "?idmzchu=" + e.layer.feature.properties.ID, name = "_self");
+                });
+
+            }
+
+</script>
