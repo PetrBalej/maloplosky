@@ -1,8 +1,8 @@
 {
-    "Id": 1,
-    "Title": "Zasobník ACE",
+    "Id": 2,
+    "Title": "Zasobník ACE222",
     "Table": {
-        "Name": "TEST_TABLE",
+        "Name": "TEST_TABLE2222",
         "Attributes": [
             {
                 "Name": "GID",
