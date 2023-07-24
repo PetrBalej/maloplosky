@@ -53,36 +53,62 @@
         }
     ],
     "GeoJSON": {
-        "type": "FeatureCollection",
-        "features": [
-          {
-            "type": "Feature",
-            "geometry": {
-              "type": "Point",
-              "coordinates": [
-                -625437.1,
-                -1011654.0
-              ]
-            },
-            "properties": {
-              "atribut1": "hodnota1",
-              "atribut2": "hodnota2"
-            }
-          },
-          {
-            "type": "Feature",
-            "geometry": {
-              "type": "Point",
-              "coordinates": [
-                -631858.1,
-                -1066898.7
-              ]
-            },
-            "properties": {
-              "atribut1": "hodnota3",
-              "atribut2": "hodnota4"
-            }
-          }
-        ]
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {},
+      "geometry": {
+        "coordinates": [
+          [
+            14.536703656343064,
+            50.188970055928024
+          ],
+          [
+            14.689057627883585,
+            50.127463285094905
+          ],
+          [
+            14.916545064841017,
+            50.365028606723484
+          ],
+          [
+            15.317256880400748,
+            50.01494232680761
+          ]
+        ],
+        "type": "LineString"
       }
+    },
+    {
+      "type": "Feature",
+      "properties": {},
+      "geometry": {
+        "coordinates": [
+          [
+            14.524181412106202,
+            49.72438955070612
+          ],
+          [
+            14.632707528820788,
+            49.59739915800472
+          ],
+          [
+            15.1002046469726,
+            49.77967519484642
+          ],
+          [
+            15.104378728384575,
+            49.59739915800472
+          ],
+          [
+            14.369740399860234,
+            49.541905901796895
+          ]
+        ],
+        "type": "LineString"
+      }
+    }
+  ]
+}
 }
