@@ -1,0 +1,88 @@
+{
+    "Id": 1,
+    "Title": "Zasobník ACE",
+    "Table": {
+        "Name": "TEST_TABLE",
+        "Attributes": [
+            {
+                "Name": "GID",
+                "Type": "number",
+                "Required": true,
+                "Mapping": []
+            },
+            {
+                "Name": "PARENT_ID",
+                "Type": "number",
+                "Required": true,
+                "Mapping": []
+            },
+            {
+                "Name": "GEOM",
+                "Type": "SDO_GEOMETRY",
+                "Required": true,
+                "Mapping": []
+            },
+            {
+                "Name": "KOD",
+                "Type": "number",
+                "Required": false,
+                "Mapping": []
+            },
+            {
+                "Name": "POPIS",
+                "Type": "text",
+                "Required": false,
+                "Mapping": []
+            }
+        ],
+        "AllowNew": true,
+        "AllowDelete": false,
+        "PrimaryKey": "GID",
+        "Schema": "GEOEDIT"
+    },
+    "Layers": [
+        {
+            "Type": "AGS",
+            "Title": "Základní mapa",
+            "Url": "https://ags.cuzk.cz/arcgis/rest/services/zm/MapServer"
+        },
+        {
+            "Type": "WFS",
+            "Title": "Maloplošky",
+            "Url": "https://gis.nature.cz/arcgis/services/Aplikace/Opendata/MapServer/WFSServer?request=GetCapabilities&service=WFS"
+        }
+    ],
+    "GeoJSON": {
+        "type": "FeatureCollection",
+        "features": [
+          {
+            "type": "Feature",
+            "geometry": {
+              "type": "Point",
+              "coordinates": [
+                16.0,
+                50.5
+              ]
+            },
+            "properties": {
+              "atribut1": "hodnota1",
+              "atribut2": "hodnota2"
+            }
+          },
+          {
+            "type": "Feature",
+            "geometry": {
+              "type": "Point",
+              "coordinates": [
+                17.0,
+                49.5
+              ]
+            },
+            "properties": {
+              "atribut1": "hodnota3",
+              "atribut2": "hodnota4"
+            }
+          }
+        ]
+      }
+}
