@@ -58,6 +58,7 @@
     {
       "type": "Feature",
       "geometry": {
+          "type": "LineString",
         "coordinates": [
           [
             14.536703656343064,
@@ -75,8 +76,8 @@
             15.317256880400748,
             50.01494232680761
           ]
-        ],
-        "type": "LineString"
+        ]
+        
       },
             "properties": {
               "atribut1": "hodnota1",
@@ -86,6 +87,7 @@
     {
       "type": "Feature",
       "geometry": {
+          "type": "LineString",
         "coordinates": [
           [
             14.524181412106202,
@@ -107,8 +109,7 @@
             14.369740399860234,
             49.541905901796895
           ]
-        ],
-        "type": "LineString"
+        ]
       },
             "properties": {
               "atribut1": "hodnota4",
